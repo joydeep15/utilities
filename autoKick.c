@@ -12,6 +12,8 @@ all active ssh users whom you have permission to kick
 
 assumes all ssh users are logged in under the name user
 
+Joydeep Halder
+
 */
 #include<stdio.h>
 #include<stdlib.h>
@@ -32,7 +34,7 @@ int main(){
 	//clear lol.txt		
 	
 	char *cmd = (char *) malloc(100*sizeof(char));	
-sprintf(cmd," ps -aux | grep \"sshd: user@\" | grep -v \"sshd: user@pts/%d\" | cut -c 10-15 > lol.txt",mytty);
+sprintf(cmd," ps -aux | grep \"sshd: user\" | grep -v \"sshd: user@pts/%d\" | cut -c 10-15 > lol.txt",mytty);
 	system(cmd);
 	free(cmd);
 	freopen("lol.txt","r",f1);	
