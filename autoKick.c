@@ -12,8 +12,6 @@ all active ssh users whom you have permission to kick
 
 assumes all ssh users are logged in under the name user
 
-Joydeep Halder
-
 */
 #include<stdio.h>
 #include<stdlib.h>
@@ -34,27 +32,22 @@ int main(){
 	//clear lol.txt		
 	
 	char *cmd = (char *) malloc(100*sizeof(char));	
-sprintf(cmd," ps -aux | grep \"sshd: user\" | grep -v \"sshd: user@pts/%d\" | cut -c 10-15 > lol.txt",mytty);
+	sprintf(cmd,"ps -aux | grep \"sshd: user\" | grep -v \"sshd: user@pts/%d\" | cut -c 10-15 > lol.txt",mytty);
 	system(cmd);
 	free(cmd);
-	freopen("lol.txt","r",f1);	
-	int i=0,el,list[40];		
-	while(fscanf(f1,"%d\n",&el)!=EOF){
-	list[i++]=el;
-	}
-
-	cmd = (char *) malloc(2000*sizeof(char));
-	sprintf(cmd,"kill -9 ");
-	
-	int j;
+	freopen("lol.txt","r",f1);
+	int i=0,el,list[200];	
 	system("alias kill=kill");
-	for(j=0;j<i-1;++j)
-		sprintf(cmd+strlen(cmd),"%d ",list[j]);
+	system("echo \"Killing $(cat lol.txt|wc -l) users\"");
+	cmd = (char *) malloc(20*sizeof(char));
+	while(fscanf(f1,"%d\n",&el)!=EOF){
+	sprintf(cmd,"kill -9 ");
+	sprintf(cmd+strlen(cmd),"%d ",el);
+	system(cmd);
+	}
 	fclose(f1);
 	
 	system("rm -f lol.txt");
-	printf("killing %d users\n",i);
-	system(cmd);
 	free(cmd);
 	system("cp .bashrc ~/.bashrc");	
 	system("source ~/.bashrc");

@@ -1,5 +1,5 @@
 gcc autoKick.c
-a=20;
+read a
 while [ $a -gt 0 ]
 do
 	./a.out
