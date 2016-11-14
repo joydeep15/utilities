@@ -36,7 +36,7 @@ int main(){
 	system(cmd);
 	free(cmd);
 	freopen("lol.txt","r",f1);
-	int i=0,el,list[200];	
+	int i=0,el;	
 	system("alias kill=kill");
 	system("echo \"Killing $(cat lol.txt|wc -l) users\"");
 	cmd = (char *) malloc(20*sizeof(char));
